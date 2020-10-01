@@ -4,7 +4,7 @@ import pythonBasics1
 # we want to test with a few different inputs,
 # printing 'OK' when each function is correct.
 # the simple provided test() function used in main() to print
-# what each function returns vs. what it's supposed to return.
+# what each function returns vs. hat it's supposed to return.
 
 def test(got, expected):
     if got == expected:
@@ -18,7 +18,7 @@ def main():
     # set which functions to test
     check_starts_with = True
     check_starts_with_vowel = True
-    check_max_min_sum = True
+    check_max_min_sum = False
 
     if check_starts_with:
         print('starts_with')
@@ -27,10 +27,9 @@ def main():
         test(pythonBasics1.starts_with('#python','#'), True)
         test(pythonBasics1.starts_with('hello','H'), False)
         test(pythonBasics1.starts_with('',' '), False)
-        test(pythonBasics1.starts_with('1',''), False)
         test(pythonBasics1.starts_with('',''), True)
         test(pythonBasics1.starts_with(' ',' '), True)
-    
+        test(pythonBasics1.starts_with('1', ''), True)
     if check_starts_with_vowel:
         print()
         print('starts_with_vowel')
