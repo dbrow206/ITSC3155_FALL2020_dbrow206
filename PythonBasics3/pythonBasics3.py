@@ -11,6 +11,7 @@ import re
 # Define a function starts_with_number(s) that takes a string and returns true
 # if it starts with a number and false otherwise.
 # (For our purposes, a number is any character that is 0,1,2,3,4,5,6,7,8, or 9.)
+
 def starts_with_number(s):
 
   if len(s) == 0:
@@ -24,9 +25,14 @@ def starts_with_number(s):
 # (For our purposes, a consonant is any letter other than A, E, I, O, U.)
 # Note: Be sure to use RegEx and it works for both upper and lower case and for nonletters!
 def starts_with_consonant(s):
-  # YOUR CODE HERE
+  if re.findall("\A[^AEIOU][^0-9]",s, re.IGNORECASE):
+    return True
 
-  return
+
+  return False
+
+
+
 
 
 # Part C. binary_multiple_of_4
@@ -35,6 +41,6 @@ def starts_with_consonant(s):
 # Note: Be sure it returns false if the string is not a valid binary number!
 # Hint: Use regular expressions to match for the pattern of a binary number that is a multiple of 4.
 def binary_multiple_of_4(s):
-  # YOUR CODE HERE
-
-  return
+  if re.findall("^[10]*0$", s):
+    return True
+  return False
