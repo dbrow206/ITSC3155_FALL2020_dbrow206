@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<nav>
+    <a href="{{ url_for('index') }}"> Home</a> ||
+    <a href="{{ url_for('get_notes') }}"> My Notes</a> ||
+    <a href="{{ url_for('new_note') }}"> Add Note</a>
+</nav>	
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -9,13 +15,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
-        <nav> 
-            <a href="{{ url_for('index')}}"> Home </a> ||
-            <a href="{{ url_for('get_notes')}}"> My Notes </a>||
-            <a href="{{ url_for('new_note')}}"> Add Note </a> 
-        
-        </nav>
-        <h1>Welcome {{user.name}} to our 49er Notes App!</h1>
+		<h1>Welcome {{user.name}} to the 49er Notes App!</h1>
         <h1>Listing notes</h1>
 
         <table>
@@ -23,10 +23,10 @@
                 <th>Title</th>
                 <th>Date</th>
             </tr>
-            {% for key, value in notes.items() %}
+            {% for note in notes %}
             <tr>
-                <td><a href="notes/{{key}}">{{ value.title }}</a></td>
-                <td>{{ value.date }}</td>
+                <td><a href="{{url_for('get_note', note_id=note.id)}}">{{note.title}}</a></td>
+                <td>{{ note.date }}</td>
             </tr>
             {% endfor %}
         </table>
