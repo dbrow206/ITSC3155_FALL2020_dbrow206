@@ -45,7 +45,6 @@ def get_note(note_id):
 
     return render_template('note.html', note=my_note, user=a_user)
 
-
 @app.route('/notes/new', methods=["GET", "POST"])
 def new_note():
     if request.method == "POST":
