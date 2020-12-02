@@ -70,14 +70,13 @@ def new_note():
             from datetime import date
             today = date.today()
             today = today.strftime("%m-%d-%Y")
-            new_record = Note(title, text, today)
+            new_record = Note(title, text, today, session['user_id'])
             db.session.add(new_record)
             db.session.commit()
 
             return redirect(url_for("get_notes"))
         else:
-            a_user = db.session.query(User).filter_by(id=session['user_id']).one()
-            return render_template('new.html', user=a_user)
+            return render_template('new.html', user=session['user'])
     else:
         return redirect(url_for('login'))
 
@@ -97,10 +96,8 @@ def update_note(note_id):
             db.session.commit()
             return redirect(url_for('get_notes'))
         else:
-            a_user = db.session.query(User).filter_by(id=session['user_id']).one()
             my_note = db.session.query(Note).filter_by(id=note_id).one()
-            return render_template('new.html', note=my_note, user=a_user)
-
+            return render_template('new.html', note=my_note, user=session['user'])
     else:
         return redirect(url_for('login'))
 
@@ -161,6 +158,17 @@ def login():
     else:
         # form did not validate or GET request
         return render_template("login.html", form=login_form)
+
+
+@app.route('/logout')
+def logout():
+    # check if a user is saved in session
+    if session.get('user'):
+        session.clear()
+
+    return redirect(url_for('index'))
+
+
 app.run(host=os.getenv('IP', '127.0.0.1'), port=int(os.getenv('PORT', 5000)), debug=True)
 
 # To see the web page in your web browser, go to the url,
